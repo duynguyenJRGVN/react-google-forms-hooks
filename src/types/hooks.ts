@@ -21,7 +21,7 @@ export type GetField = (id: string) => Field
 
 export type UseGoogleFormReturn = UseFormReturn & {
   getField: GetField
-  submitToGoogleForms: (form: FormData) => Promise<boolean>
+  submitToGoogleForms: (form: FormData, isDev: boolean) => Promise<boolean>
 }
 
 export type RegisterReturn = {

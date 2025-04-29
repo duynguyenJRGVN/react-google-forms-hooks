@@ -3,7 +3,7 @@ import { BaseField, Column, DropdownField, Field, GridField, Line, LinearField, 
 export declare type GetField = (id: string) => Field;
 export declare type UseGoogleFormReturn = UseFormReturn & {
     getField: GetField;
-    submitToGoogleForms: (form: FormData) => Promise<boolean>;
+    submitToGoogleForms: (form: FormData, isDev: boolean) => Promise<boolean>;
 };
 export declare type RegisterReturn = {
     register: (options?: RegisterOptions) => UseFormRegisterReturn;

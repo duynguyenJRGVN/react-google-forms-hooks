@@ -17,8 +17,8 @@ export const useGoogleForm = ({ form }: { form: GoogleForm }) => {
 
   methods.getField = (id: string) => resolveField(id, form)
 
-  methods.submitToGoogleForms = (formData) =>
-    submitToGoogleForms(form, formData)
+  methods.submitToGoogleForms = (formData, isDev) =>
+    submitToGoogleForms(form, formData, isDev)
 
   return methods
 }

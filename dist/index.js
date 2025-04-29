@@ -176,6 +176,7 @@ var useCustomOptionField = (function (id, type) {
 });
 
 var GOOGLE_FORMS_URL = 'https://survey.pizzahut.vn/api/google-form-proxy';
+var GOOGLE_FORMS_URL_DEV = 'http://localhost:4000/api/google-form-proxy';
 var formatQuestionName = function formatQuestionName(id) {
   if (id.includes(OTHER_OPTION_RESPONSE)) {
     return "entry." + id.replace("-" + OTHER_OPTION + "-" + OTHER_OPTION_RESPONSE, '') + "." + OTHER_OPTION_RESPONSE;
@@ -183,7 +184,7 @@ var formatQuestionName = function formatQuestionName(id) {
 
   return "entry." + id;
 };
-var submitToGoogleForms = function submitToGoogleForms(form, formData) {
+var submitToGoogleForms = function submitToGoogleForms(form, formData, isDev) {
   try {
     var urlParams = new URLSearchParams();
     Object.keys(formData).forEach(function (key) {
@@ -197,7 +198,8 @@ var submitToGoogleForms = function submitToGoogleForms(form, formData) {
         }
       }
     });
-    return Promise.resolve(fetch(GOOGLE_FORMS_URL + "/" + form.action + "/formResponse?submit=Submit&" + urlParams.toString(), {
+    var finalURL = isDev ? GOOGLE_FORMS_URL_DEV : GOOGLE_FORMS_URL;
+    return Promise.resolve(fetch(finalURL + "/" + form.action + "/formResponse?submit=Submit&" + urlParams.toString(), {
       method: 'GET',
       mode: 'no-cors',
       headers: {
@@ -230,8 +232,8 @@ var useGoogleForm = function useGoogleForm(_ref) {
     return resolveField(id, form);
   };
 
-  methods.submitToGoogleForms = function (formData) {
-    return submitToGoogleForms(form, formData);
+  methods.submitToGoogleForms = function (formData, isDev) {
+    return submitToGoogleForms(form, formData, isDev);
   };
 
   return methods;
@@ -665,6 +667,7 @@ var googleFormsToJson = function googleFormsToJson(formUrl) {
 };
 
 exports.GOOGLE_FORMS_URL = GOOGLE_FORMS_URL;
+exports.GOOGLE_FORMS_URL_DEV = GOOGLE_FORMS_URL_DEV;
 exports.GoogleFormProvider = GoogleFormProvider;
 exports.formatQuestionName = formatQuestionName;
 exports.googleFormsToJson = googleFormsToJson;

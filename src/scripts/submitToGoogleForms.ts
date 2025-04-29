@@ -8,6 +8,8 @@ import {
 // export const GOOGLE_FORMS_URL = 'https://docs.google.com/forms/d'
 export const GOOGLE_FORMS_URL =
   'https://survey.pizzahut.vn/api/google-form-proxy'
+export const GOOGLE_FORMS_URL_DEV =
+  'http://localhost:4000/api/google-form-proxy'
 
 export const formatQuestionName = (id: string) => {
   if (id.includes(OTHER_OPTION_RESPONSE)) {
@@ -22,7 +24,8 @@ export const formatQuestionName = (id: string) => {
 
 export const submitToGoogleForms = async (
   form: GoogleForm,
-  formData: object
+  formData: object,
+  isDev: boolean
 ): Promise<boolean> => {
   const urlParams = new URLSearchParams()
   Object.keys(formData).forEach((key) => {
@@ -36,9 +39,9 @@ export const submitToGoogleForms = async (
       }
     }
   })
-
+  const finalURL: string = isDev ? GOOGLE_FORMS_URL_DEV : GOOGLE_FORMS_URL
   const fetchedResult = await fetch(
-    `${GOOGLE_FORMS_URL}/${
+    `${finalURL}/${
       form.action
     }/formResponse?submit=Submit&${urlParams.toString()}`,
     {
