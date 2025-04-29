@@ -5,7 +5,9 @@ import {
   OTHER_OPTION_RESPONSE
 } from '../hooks/utils/useCustomOptionField'
 
-export const GOOGLE_FORMS_URL = 'https://docs.google.com/forms/d'
+// export const GOOGLE_FORMS_URL = 'https://docs.google.com/forms/d'
+export const GOOGLE_FORMS_URL =
+  'https://survey.pizzahut.vn/api/google-form-proxy'
 
 export const formatQuestionName = (id: string) => {
   if (id.includes(OTHER_OPTION_RESPONSE)) {

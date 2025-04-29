@@ -20,29 +20,33 @@ const toBool = (n: number): boolean => n === 1
 
 const toString = (n: number): string => `${n}`
 
-const assertValidUrl = (formUrl: string): void => {
-  const googleFormsHosts = ['docs.google.com', 'forms.gle']
-  const url = new URL(formUrl)
-
-  if (!googleFormsHosts.includes(url.host)) {
-    throw new Error(
-      `Invalid google forms host. ${
-        url.host
-      } is expected to be ${googleFormsHosts
-        .join(', ')
-        .replace(/, ([^,]*)$/, ' or $1')}.`
-    )
-  }
-
-  if (url.host === googleFormsHosts[0] && !url.pathname.endsWith('/viewform')) {
-    throw new Error(`Please use the form's public URL.`)
-  }
-}
+// const assertValidUrl = (formUrl: string): void => {
+//   const googleFormsHosts = [
+//     'docs.google.com',
+//     'forms.gle',
+//     'localhost:4000',
+//     'survey.pizzahut.vn'
+//   ]
+//   const url = new URL(formUrl)
+//
+//   if (!googleFormsHosts.includes(url.host)) {
+//     throw new Error(
+//       `Invalid google forms host. ${
+//         url.host
+//       } is expected to be ${googleFormsHosts
+//         .join(', ')
+//         .replace(/, ([^,]*)$/, ' or $1')}.`
+//     )
+//   }
+//
+//   if (url.host === googleFormsHosts[0] && !url.pathname.endsWith('/viewform')) {
+//     throw new Error(`Please use the form's public URL.`)
+//   }
+// }
 
 const getFormHtml = async (formUrl: string) => {
   const response = await fetch(formUrl)
-  const html = await response.text()
-  return html
+  return await response.text()
 }
 
 const extractFormData = (html: string): FormData => {
@@ -222,7 +226,7 @@ const parseFormData = ({ formData, fbzx }: FormData): GoogleForm => {
 }
 
 export const googleFormsToJson = async (formUrl: string) => {
-  assertValidUrl(formUrl)
+  // assertValidUrl(formUrl)
 
   let html
   try {

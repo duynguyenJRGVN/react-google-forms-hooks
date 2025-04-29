@@ -9,8 +9,7 @@ const resolveField = (id: string, form: GoogleForm) => {
     throw new Error(`Field with id ${id} wasn't found in your form`)
   }
 
-  const field = form.fields[fieldIndex]
-  return field
+  return form.fields[fieldIndex]
 }
 
 export const useGoogleForm = ({ form }: { form: GoogleForm }) => {

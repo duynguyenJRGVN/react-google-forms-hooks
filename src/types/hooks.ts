@@ -1,20 +1,20 @@
 import {
-  UseFormReturn,
-  UseFormRegisterReturn,
+  FieldError,
   RegisterOptions,
-  FieldError
+  UseFormRegisterReturn,
+  UseFormReturn
 } from 'react-hook-form'
 
 import {
-  Column,
-  Field,
-  Line,
-  Option,
   BaseField,
-  TextField,
-  GridField,
+  Column,
   DropdownField,
-  LinearField
+  Field,
+  GridField,
+  Line,
+  LinearField,
+  Option,
+  TextField
 } from './form'
 
 export type GetField = (id: string) => Field
