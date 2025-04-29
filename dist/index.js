@@ -4,7 +4,7 @@ var reactHookForm = require('react-hook-form');
 var fetch = _interopDefault(require('isomorphic-unfetch'));
 var React = require('react');
 var slugify = _interopDefault(require('slugify'));
-var cheerio = _interopDefault(require('cheerio'));
+var cheerio = require('cheerio');
 
 function _extends() {
   _extends = Object.assign || function (target) {

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import fetch from 'isomorphic-unfetch';
 import { createContext, useContext, createElement, useState, useEffect } from 'react';
 import slugify from 'slugify';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -446,7 +446,7 @@ var getFormHtml = function getFormHtml(formUrl) {
 };
 
 var extractFormData = function extractFormData(html) {
-  var $ = cheerio.load(html);
+  var $ = load(html);
   var fbzx = $('[name="fbzx"]').attr('value');
 
   if (!fbzx) {
